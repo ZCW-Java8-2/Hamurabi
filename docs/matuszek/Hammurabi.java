@@ -93,13 +93,21 @@ import java.util.Scanner;
         //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain. (Example: if you planted 50 acres, and your number is 3, you harvest 150 bushels of grain). Return the number of bushels harvested.
 
         int grainEatenByRats(int bushels){
-            return 1;
+            boolean ratInfestation = false;
+            int ratEaten = 0;
+            if(rand.nextFloat() * 100  <= 40){
+                ratInfestation = true;
+            }
+            if(ratInfestation){
+                ratEaten = bushels * (rand.nextInt(31 - 10 ) + 10) / 100;
+            }
+            return ratEaten;
         }
 
         //There is a 40% chance that you will have a rat infestation. When this happens, rats will eat somewhere between 10% and 30% of your grain. Return the amount of grain eaten by rats (possibly zero).
 
        int newCostOfLand(){
-            int min = 17, max = 23;
+            int min = 17, max = 24;
            this.landValue = rand.nextInt(max - min) + min;
             return this.landValue;
        }
