@@ -10,6 +10,10 @@ import java.util.Scanner;
         int bushelsOfGrain;
         int acres;
         int landValue;
+        int harvest = 0;
+        int ratEaten = 0;
+        int starving = 0;
+        int immigrants = 0;
 
         public Hammurabi(int peo,int bus, int acr, int lan){
             this.people=peo;
@@ -81,15 +85,19 @@ import java.util.Scanner;
        // Return true if more than 45% of the people starve. (This will cause you to be immediately thrown out of office, ending the game.)
 
        int immigrants(int population, int acresOwned, int grainInStorage){
-           return 1;
+           if(starving == 0){
+               this.immigrants = (20 * acresOwned + grainInStorage) / (100 * population) + 1;
+           }
+
+            return immigrants;
        }
 
         //Nobody will come to the city if people are starving (so don't call this method). If everyone is well fed, compute how many people come to the city as: (20 * _number of acres you have_ + _amount of grain you have in storage_) / (100 * _population_) + 1.
 
        int harvest(int acres, int bushelsUsedAsSeed){
            int fertilizer = rand.nextInt(7 - 1) + 1;
-
-            return bushelsUsedAsSeed * fertilizer * acres;
+            this.harvest = bushelsUsedAsSeed * fertilizer * acres;
+            return harvest;
        }
 
         //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain. (Example: if you planted 50 acres, and your number is 3, you harvest 150 bushels of grain). Return the number of bushels harvested.
@@ -103,7 +111,8 @@ import java.util.Scanner;
             if(ratInfestation){
                 ratEaten = bushels * (rand.nextInt(31 - 10 ) + 10) / 100;
             }
-            return ratEaten;
+            this.ratEaten = ratEaten;
+            return this.ratEaten;
         }
 
         //There is a 40% chance that you will have a rat infestation. When this happens, rats will eat somewhere between 10% and 30% of your grain. Return the amount of grain eaten by rats (possibly zero).
