@@ -1,10 +1,23 @@
-package hammurabi;               // package declaration
+package Hammurabi;               // package declaration
 import java.util.Random;         // imports go here
 import java.util.Scanner;
 
     public class Hammurabi {         // must save in a file named Hammurabi.java
         Random rand = new Random();  // this is an instance variable
         Scanner scanner = new Scanner(System.in);
+
+        int people;
+        int bushelsOfGrain;
+        int acres;
+        int landValue;
+
+        public Hammurabi(int peo,int bus, int acr, int lan;){
+            this.people=peo;
+            this.bushelsOfGrain=bus;
+            this.acres=acr;
+            this.landValue=lan;
+        }
+
 
         public static void main(String[] args) { // required in every Java program
             new Hammurabi().playGame();
@@ -17,7 +30,14 @@ import java.util.Scanner;
 
         //other methods go here
         int askHowManyAcresToBuy(int price, int bushels){
-            return 1;
+            System.out.println("How many acres do you wish to buy?");
+            int in=scanner.nextInt();
+            while(in*price>bushels || in <=0){
+                System.out.println("Hammurabi: Thank again. You have only "+ bushels+" of grain.  ");
+                System.out.println("Re-enter the numbers of acres you wish to buy");
+                in=scanner.nextInt();
+            }
+                return in;
         }
 
         //Asks the player how many acres of land to buy, and returns that number. You must have enough grain to pay for your purchase.
