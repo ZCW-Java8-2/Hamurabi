@@ -1,9 +1,17 @@
 import java.util.*;
 
 public class Hammurabi {
+
+    Random random = new Random();
+    int randomNum = random.nextInt();
+    Scanner scanner = new Scanner (System.in);
+    int  population, landsOwned, bushels, year;
+    int temp;
+    int price;
+
     public static void main(String[] args) {
             Hammurabi ham = new Hammurabi(100, 1000, 3000, 0, 19);
-        while(ham.playerWantsNewGame()){  //Initialize a loop to keep the game playing if the game ends and the player wants to play again
+        while(ham.exitGame() == false){  //Initialize a loop to keep the game playing if the game ends and the player wants to play again
             ham.setUpNewGame();
             while(ham.getYear() < 11){ // Starts the actual game
                 ham.initializeRound();
@@ -33,29 +41,8 @@ public class Hammurabi {
         }
     }
 
-    Random random = new Random();
-    int randomNum = random.nextInt();
-    Scanner scanner = new Scanner (System.in);
-    int  population, landsOwned, bushels, year;
-    int temp;
-    int price;
-
-
-    public void setPopulation(int population) {
-        this.population = population;
-    }
-
-    public void setLandsOwned(int landsOwned) {
-        this.landsOwned = landsOwned;
-    }
-
-    public void setBushels(int bushels) {
-        this.bushels = bushels;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
+    // *****************************************************************************************************************
+    // ***************** CONSTRUCTOR/GAME INITIALIZATION/ROUND INITILIZATION/EXIT
 
     public Hammurabi(int population, int landsOwned, int bushels, int year, int price) {
         this.population = population;
@@ -77,6 +64,16 @@ public class Hammurabi {
         this.setPrice(newCostOfLand());
         this.incrementYear();
     }
+
+    public boolean exitGame(){ //THIS IS NOT FINISHED YET... NEED TO ADD REAL LOGIC
+        System.out.println("Would you like to continue playing?");
+        return false;
+    }
+
+    // *****************************************************************************************************************
+    // ***************** CORE FEATURES
+
+
     public int howManyAcresToBuy(int acresToBuy, int price, int bushels){
         if ( (acresToBuy * price) > bushels){
             System.out.println("You FOOL! You don't have enough bushels to buy that many acres!");
@@ -104,9 +101,12 @@ public class Hammurabi {
         //String
     }
 
-    public void playGame() {
+    public void playGame() { // DO WE EVEN NEED THIS?
         //int
     }
+
+    // *****************************************************************************************************************
+    // ***************** SUPPLEMENTARY FEATURES
 
     public int plagueDeaths(int population) {
         return 0;
@@ -136,12 +136,15 @@ public class Hammurabi {
         return random.nextInt(7)+17;
     }
 
-    public boolean playerWantsNewGame(){ //THIS IS NOT FINISHED YET... NEED TO ADD REAL LOGIC
-        System.out.println("Would you like to continue playing?");
-        return true;
-    }
+    // *****************************************************************************************************************
+    // ***************** GETTERS/SETTERS/CHANGERS/INCREMENTERS
+
     public int getPopulation() {
         return population;
+    }
+
+    public void setPopulation(int population) {
+        this.population = population;
     }
 
     public void changePopulation(int populationChange) {
@@ -152,6 +155,10 @@ public class Hammurabi {
         return landsOwned;
     }
 
+    public void setLandsOwned(int landsOwned) {
+        this.landsOwned = landsOwned;
+    }
+
     public void changeLandsOwned(int acresToChange) {
         this.landsOwned += acresToChange;
     }
@@ -160,12 +167,20 @@ public class Hammurabi {
         return bushels;
     }
 
+    public void setBushels(int bushels) {
+        this.bushels = bushels;
+    }
+
     public void changeBushels(int bushelsChanged) {
         this.bushels += bushelsChanged;
     }
 
     public int getYear() {
         return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public void incrementYear() {
@@ -179,6 +194,9 @@ public class Hammurabi {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    // *****************************************************************************************************************
+    // ***************** SCANNER
 
     int getNumber(String message) {
         while (true) {
