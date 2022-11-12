@@ -99,7 +99,9 @@ import java.util.Scanner;
         //There is a 40% chance that you will have a rat infestation. When this happens, rats will eat somewhere between 10% and 30% of your grain. Return the amount of grain eaten by rats (possibly zero).
 
        int newCostOfLand(){
-           return 1;
+            int min = 17, max = 23;
+           this.landValue = rand.nextInt(max - min) + min;
+            return this.landValue;
        }
 
         //The price of land is random, and
