@@ -87,7 +87,9 @@ import java.util.Scanner;
         //Nobody will come to the city if people are starving (so don't call this method). If everyone is well fed, compute how many people come to the city as: (20 * _number of acres you have_ + _amount of grain you have in storage_) / (100 * _population_) + 1.
 
        int harvest(int acres, int bushelsUsedAsSeed){
-           return 1;
+           int fertilizer = rand.nextInt(7 - 1) + 1;
+
+            return bushelsUsedAsSeed * fertilizer * acres;
        }
 
         //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain. (Example: if you planted 50 acres, and your number is 3, you harvest 150 bushels of grain). Return the number of bushels harvested.
