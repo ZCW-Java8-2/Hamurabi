@@ -6,6 +6,7 @@ import java.util.Scanner;
         Random rand = new Random();  // this is an instance variable
         Scanner scanner = new Scanner(System.in);
 
+        boolean gameOver = false;
         int people;
         int bushelsOfGrain;
         int acres;
@@ -14,6 +15,7 @@ import java.util.Scanner;
         int ratEaten = 0;
         int starving = 0;
         int immigrants = 0;
+
 
         public Hammurabi(int peo,int bus, int acr, int lan){
             this.people=peo;
@@ -79,7 +81,14 @@ import java.util.Scanner;
        // Each person needs 20 bushels of grain to survive. If you feed them more than this, they are happy, but the grain is still gone. You don't get any benefit from having happy subjects. Return the number of deaths from starvation (possibly zero).
 
        boolean uprising(int population, int howManyPeopleStarved){
-           return true;
+            double starvingRate = (double) howManyPeopleStarved / population;
+            if(starvingRate > 0.450){
+                this.gameOver = true;
+            } else if (starvingRate <= 0.450) {
+                this.gameOver = false;
+            }
+
+           return this.gameOver;
        }
 
        // Return true if more than 45% of the people starve. (This will cause you to be immediately thrown out of office, ending the game.)
