@@ -1,4 +1,4 @@
-package Hammurabi;               // package declaration
+package hammurabi.docs.matuszek;//package Hammurabi;
 import java.util.Random;         // imports go here
 import java.util.Scanner;
 
@@ -11,16 +11,19 @@ import java.util.Scanner;
         int acres;
         int landValue;
 
-        public Hammurabi(int peo,int bus, int acr, int lan;){
+        public Hammurabi(int peo,int bus, int acr, int lan){
             this.people=peo;
             this.bushelsOfGrain=bus;
             this.acres=acr;
             this.landValue=lan;
         }
-
+//*   100 people
+//*   2800 bushels of grain in storage
+//*   1000 acres of land
+//*   Land value is 19 bushels/acre
 
         public static void main(String[] args) { // required in every Java program
-            new Hammurabi().playGame();
+            new Hammurabi(100,2800,1000,19).playGame();
         }
 
         void playGame() {
@@ -72,7 +75,7 @@ import java.util.Scanner;
        // Each person needs 20 bushels of grain to survive. If you feed them more than this, they are happy, but the grain is still gone. You don't get any benefit from having happy subjects. Return the number of deaths from starvation (possibly zero).
 
        boolean uprising(int population, int howManyPeopleStarved){
-           return 1;
+           return true;
        }
 
        // Return true if more than 45% of the people starve. (This will cause you to be immediately thrown out of office, ending the game.)
