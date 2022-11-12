@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +15,14 @@ public class HammurabiTest {
     @Before
     public void setUp() throws Exception {
         ham = new Hammurabi();
+    }
+
+    @Test
+    public void askHowManyAcresToBuyTest(){
+        ham.bushels = 2000;
+        int expected = 10;
+        int actual = ham.askHowManyAcresToBuy(20, ham.bushels);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
