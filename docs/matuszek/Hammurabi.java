@@ -94,9 +94,12 @@ import java.util.Scanner;
         // You must have enough acres, enough grain, and enough people to do the planting.
         // Any grain left over goes into storage for next year.
         int plagueDeaths(int population){
-
-            return population/2;
+            int plaDea = rand.nextInt(100)+1;
+            if(plaDea<=15) {
+                return population / 2;
+            }else return 0;
         }
+
 
        // Each year, there is a 15% chance of a horrible plague. When this happens, half your people die.
        // Return the number of plague deaths (possibly zero).
