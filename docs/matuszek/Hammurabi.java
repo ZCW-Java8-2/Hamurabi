@@ -1,21 +1,27 @@
 package hammurabi.docs.matuszek;//package Hammurabi;
 import java.util.Random;         // imports go here
 import java.util.Scanner;
+import hammurabi.docs.matuszek.normalEvents.*;
 
     public class Hammurabi {         // must save in a file named Hammurabi.java
         Random rand = new Random();  // this is an instance variable
         Scanner scanner = new Scanner(System.in);
 
-
+        int year = 0;
         boolean gameOver = false;
         int harvest = 0;
         int ratEaten = 0;
         int starving = 0;
         int immigrants = 0;
-        public int people;
-        public int bushelsOfGrain;
-        public int acres;
-        public int landValue;
+        public int people = 100;
+        public int bushelsOfGrain = 2800;
+        public int acres = 1000;
+        public int landValue = 25;
+
+        int peopleDeath = 0;
+        int plagueDeath = 0;
+
+
 
 
         public Hammurabi(int peo,int bus, int acr, int lan){
@@ -31,15 +37,16 @@ import java.util.Scanner;
 
         public static void main(String[] args) { // required in every Java program
            //
-            Hammurabi h = new Hammurabi(100,2800,1000,19);
+            Hammurabi h = new Hammurabi( 100,2800,1000,19);
+            h.playGame();
         }
         void playGame() {
             // declare local variables here: grain, population, etc.
             // statements go after the declations
-            int people=100;
-            int bushelsOfGrain =2800;
-            int acres=1000;
-            int landValue=19;
+            while(!gameOver){
+                this.year += 1;
+                normalEvents.printStatus();
+            }
         }
         //other methods go here
         int askHowManyAcresToBuy(int price, int bushels){
@@ -103,7 +110,7 @@ import java.util.Scanner;
         int plagueDeaths(int population){
             int plaDea = rand.nextInt(100)+1;
             if(plaDea<=15) {
-                return population / 2;
+                return this.peopleDeath = population / 2;
             }else return 0;
         }
 
