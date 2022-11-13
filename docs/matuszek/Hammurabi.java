@@ -45,7 +45,7 @@ import hammurabi.docs.matuszek.normalEvents.*;
             // statements go after the declations
             while(!gameOver){
                 this.year += 1;
-                normalEvents.printStatus();
+
             }
         }
         //other methods go here
