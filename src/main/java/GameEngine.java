@@ -5,7 +5,6 @@ import static java.lang.Math.floor;
 public class GameEngine {
 
     Random random = new Random();
-    int randomNum = random.nextInt();
 
     // *****************************************************************************************************************
     // ***************** CONSTRUCTOR/GAME INITIALIZATION/ROUND INITILIZATION/EXIT
