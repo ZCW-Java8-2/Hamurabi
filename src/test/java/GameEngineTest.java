@@ -14,16 +14,6 @@ class GameEngineTest {
         return actual > 0.90 * expected && actual < 1.10 * expected;
     }
 
-
-    @Test
-    public void calculateHowManyAcresToBuyTest(){
-        State state = new State(100, 1000, 3000, 0, 19);
-        GameEngine game = new GameEngine();
-        int expected = 10;
-        int actual = game.calculateAcresToBuy(20, state.getPrice(), state.getBushels());
-        Assert.assertEquals(expected, actual);
-    }
-
     @Test
     public void HowManyAcresToBuyTest1() {
         //If price of acres are at maximum of 24
