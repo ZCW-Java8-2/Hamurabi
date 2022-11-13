@@ -6,10 +6,17 @@ import java.util.Scanner;
         Random rand = new Random();  // this is an instance variable
         Scanner scanner = new Scanner(System.in);
 
+
+        boolean gameOver = false;
+        int harvest = 0;
+        int ratEaten = 0;
+        int starving = 0;
+        int immigrants = 0;
         public int people;
         public int bushelsOfGrain;
         public int acres;
         public int landValue;
+
 
         public Hammurabi(int peo,int bus, int acr, int lan){
             this.people=peo;
@@ -115,17 +122,37 @@ import java.util.Scanner;
 
        boolean uprising(int population, int howManyPeopleStarved){
 
-           return true;
+            double starvingRate = (double) howManyPeopleStarved / population;
+            if(starvingRate > 0.450){
+                this.gameOver = true;
+            } else if (starvingRate <= 0.450) {
+                this.gameOver = false;
+            }
+
+           return this.gameOver;
+
+
+           
+
        }
 
        // Return true if more than 45% of the people starve. (This will cause you to be immediately thrown out of office, ending the game.)
 
        int immigrants(int population, int acresOwned, int grainInStorage){
+
+           if(starving == 0){
+               this.immigrants = (20 * acresOwned + grainInStorage) / (100 * population) + 1;
+           }
+
+            return immigrants;
+           /*
            if(starvationDeaths(population,grainInStorage)>0){
                return 0;
            }else{
                return (20*acresOwned+grainInStorage)/(100*population)+1;
            }
+           */
+
        }
 
         //Nobody will come to the city if people are starving (so don't call this method).
@@ -133,21 +160,39 @@ import java.util.Scanner;
         // (20 * _number of acres you have_ + _amount of grain you have in storage_) / (100 * _population_) + 1.
 
        int harvest(int acres, int bushelsUsedAsSeed){
+
+           int fertilizer = rand.nextInt(7 - 1) + 1;
+            this.harvest = bushelsUsedAsSeed * fertilizer * acres;
+            return harvest;
+          /*
            int ran = rand.nextInt(6)+1;
             return 1;
+            */
+
        }
 
         //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain.
         // (Example: if you planted 50 acres, and your number is 3, you harvest 150 bushels of grain). Return the number of bushels harvested.
 
         int grainEatenByRats(int bushels){
-            return 1;
+            boolean ratInfestation = false;
+            int ratEaten = 0;
+            if(rand.nextFloat() * 100  <= 40){
+                ratInfestation = true;
+            }
+            if(ratInfestation){
+                ratEaten = bushels * (rand.nextInt(31 - 10 ) + 10) / 100;
+            }
+            this.ratEaten = ratEaten;
+            return this.ratEaten;
         }
 
         //There is a 40% chance that you will have a rat infestation. When this happens, rats will eat somewhere between 10% and 30% of your grain. Return the amount of grain eaten by rats (possibly zero).
 
        int newCostOfLand(){
-           return 1;
+            int min = 17, max = 24;
+           this.landValue = rand.nextInt(max - min) + min;
+            return this.landValue;
        }
 
         //The price of land is random, and
