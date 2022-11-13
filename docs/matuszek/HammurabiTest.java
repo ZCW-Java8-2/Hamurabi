@@ -1,4 +1,4 @@
-package hammurabi;
+package hammurabi.docs.matuszek;
 
 import static org.junit.Assert.*;
 
@@ -6,16 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class HammurabiTest {
-    
+
     Hammurabi ham;
-    
+
     boolean about(double expected, double actual) {
         return actual > 0.90 * expected && actual < 1.10 * expected;
     }
 
     @Before
     public void setUp() throws Exception {
-        ham = new Hammurabi();
+        ham = new Hammurabi(100,2800,1000,19);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class HammurabiTest {
         assertEquals("In a plague, " + deaths + "% of your people die, not 50%.",
                      50, deaths);
     }
-    
+
     @Test
     public final void testStarvationDeaths() {
         int deaths = ham.starvationDeaths(100, 1639);
@@ -69,7 +69,7 @@ public class HammurabiTest {
     public final void testHarvest() {
         int[] yield = new int[7];
         for (int i = 0; i < 1000; i++) {
-            int harvest = ham.harvest(1);
+            int harvest = ham.harvest(1,1);
             assertTrue("Illegal harvest per acre: " + harvest, harvest > 0 && harvest <= 6);
             yield[harvest] += 1;
         }
@@ -88,7 +88,7 @@ public class HammurabiTest {
             }
         }
         int percentInfestations = infestations / 100;
-        assertTrue("Number of rat infestations is about " + percentInfestations + 
+        assertTrue("Number of rat infestations is about " + percentInfestations +
                    ", not about 40%.", about(400, infestations));
     }
 
