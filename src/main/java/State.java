@@ -2,23 +2,23 @@ import java.util.Random;
 
 public class State {
     int population, landsOwned, bushels, price, year;
-    int pDeaths, sDeaths, immigrants, harvest, rats;
+    int pDeaths, sDeaths, sDeathsPool, immigrants, harvest, rats, immigrantsPool;
     Random random = new Random();
 
     public State(){
     }
 
-    public State(int population, int landsOwned, int bushels, int year, int price, int pDeaths, int sDeaths, int immigrants, int harvest, int rats) {
-        setPopulation(population); //<-using setters instead of instance variable
-        setLandsOwned(landsOwned);
-        setBushels(bushels);
-        setYear(year);
-        setPrice(price);
-        setpDeaths(pDeaths);
-        setsDeaths(sDeaths);
-        setImmigrants(immigrants);
-        setHarvest(harvest);
-        setRats(rats);
+//    public State(int population, int landsOwned, int bushels, int year, int price, int pDeaths, int sDeaths, int immigrants, int harvest, int rats) {
+//        setPopulation(population); //<-using setters instead of instance variable
+//        setLandsOwned(landsOwned);
+//        setBushels(bushels);
+//        setYear(year);
+//        setPrice(price);
+//        setpDeaths(pDeaths);
+//        setsDeaths(sDeaths);
+//        setImmigrants(immigrants);
+//        setHarvest(harvest);
+//        setRats(rats);
 
         //        this.population = population;
 //        this.landsOwned = landsOwned;
@@ -30,7 +30,7 @@ public class State {
 //        this.immigrants = immigrants;
 //        this.harvest = harvest;
 //        this.rats = rats;
-    }
+//    }
 
     public State(int population, int landsOwned, int bushels, int year, int price){
         setPopulation(population); //<-Using setters instead of instance variable
@@ -152,5 +152,21 @@ public class State {
 
     public void setRats(int rats) {
         this.rats = rats;
+    }
+
+    public int getsDeathsPool() {
+        return sDeathsPool;
+    }
+
+    public void setsDeathsPool(int sDeathsPool) {
+        this.sDeathsPool = sDeathsPool;
+    }
+
+    public int getImmigrantsPool() {
+        return immigrantsPool;
+    }
+
+    public void setImmigrantsPool(int immigrantsPool) {
+        this.immigrantsPool = immigrantsPool;
     }
 }

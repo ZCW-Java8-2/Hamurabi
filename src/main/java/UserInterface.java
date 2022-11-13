@@ -7,11 +7,10 @@ public class UserInterface {
 
     public void main() {
 
-        while(true){  //Initialize a loop to keep the game playing if the game ends and the player wants to play again
+        while(true){
             setUpNewGame();
             announceGame();
-            while(state.getYear() < 11){ // Starts the actual game
-                initializeRound();
+            while(state.getYear() < 11){
 
                 // Asks how many acres to buy
                 int acresToBuy = console.getNumber("How many acres would you like to buy? The price is currently " + state.getPrice() + " bushels per acre.");
@@ -36,8 +35,17 @@ public class UserInterface {
                 // Asks how many acres to plant with grain
                 int acresToPlant = console.getNumber("How many acres to plant?");
                 askHowManyAcresToPlant(acresToPlant);
+
                 processRound(state.getPopulation(), bushelsFed, state.getLandsOwned(), acresToPlant*2, state.getBushels());
+
                 printSummary();
+
+                initializeRound();
+            }
+            if(state.getYear() == 11) { //<-newly added, it works
+                badEnding();
+                normalEnding();
+                goodEnding();
             }
             if(exitGame() == false) break;
         }
@@ -46,7 +54,7 @@ public class UserInterface {
     public void setUpNewGame(){
         state.setPopulation(100);
         state.setLandsOwned(1000);
-        state.setBushels(3000);
+        state.setBushels(2800);
         state.setYear(0);
         state.setPrice(19);
         state.setpDeaths(0);
@@ -66,14 +74,14 @@ public class UserInterface {
 
     public void processRound(int population, int bushelsFedToPeople, int acresOwned, int bushelsUsedAsSeed, int bushels ){
 
-        state.setpDeaths(game.plagueDeaths(population));
+        state.setImmigrants(game.immigrants(population, acresOwned, bushels, bushelsFedToPeople));
+        state.changePopulation(state.getImmigrants());
+
+        state.setpDeaths(game.plagueDeaths(state.getPopulation()));
         state.changePopulation(-state.getpDeaths());
 
         state.setsDeaths(game.starvationDeaths(population, bushelsFedToPeople));
         state.changePopulation(-state.getsDeaths());
-
-        state.setImmigrants(game.immigrants(population, acresOwned, bushels, bushelsFedToPeople));
-        state.changePopulation(state.getImmigrants());
 
 //        state.setHarvest(game.harvest(bushelsUsedAsSeed));
 //        state.changeBushels(state.getHarvest()); <-Bugged due to RNG, recommend not use
@@ -83,6 +91,10 @@ public class UserInterface {
 
         state.setPrice(state.newCostOfLand());
 
+        state.setsDeathsPool(state.getsDeathsPool()+state.getsDeaths());
+
+        state.setImmigrantsPool(state.getImmigrantsPool() + state.getImmigrants());
+
         state.incrementYear();
     }
 
@@ -90,8 +102,9 @@ public class UserInterface {
         System.out.println("O great Hammurabi");
         System.out.println("You are now in year " + state.getYear() + " of your ten year rule.");
         System.out.println("\n");
-        System.out.println("In the previous year " + state.getsDeaths() + " people starved to death.");
         System.out.println("In the previous year "+ state.getImmigrants() + " entered the kingdom.");
+        System.out.println("In the previous year " + state.getsDeaths() + " people starved to death.");
+        System.out.println("In the previous year " + state.getpDeaths() + " people died from plague");
         System.out.println("The population is now " + state.getPopulation());
 //        System.out.println("We harvested " + state.getHarvest() + " bushels"); <-Bugged due to RNG
         System.out.println("Rats destroyed " + state.getRats() + " bushels");
@@ -101,54 +114,39 @@ public class UserInterface {
         System.out.println("\n");
     }
 
-    public void finalSummary() {
-        //String
-    }
-
     public void askHowManyAcresToBuy(int acresToBuy){
         if (game.calculateAcresToBuy(acresToBuy, state.getPrice(), state.getBushels()) != 0){
             state.changeLandsOwned(acresToBuy);
             state.changeBushels(-(acresToBuy * state.getPrice()));
-            System.out.println("Bushels left: " + state.getBushels()
-                            + "\nacres bought: " + acresToBuy
-                    + "\nAcres update: " + state.getLandsOwned());
-            System.out.println("\n");
-            System.out.println("AMAZING! You bought " + acresToBuy + " acres!" );
-            System.out.println("\n");
+            prompt();
         }
     }
 
     public void askHowManyAcresToSell(int acresToSell){
-        if (game.calculateAcresToSell(acresToSell, state.getLandsOwned(), state.getPopulation()) != 0){
+        if (game.calculateAcresToSell(acresToSell, state.getLandsOwned()) != 0){
             state.changeLandsOwned(-acresToSell);
             state.changeBushels(acresToSell * state.getPrice());
-            System.out.println("Bushels left: " + state.getBushels()
-                    + "\nacres sold: " + acresToSell
-                    + "\nAcres update: " + state.getLandsOwned());
-            System.out.println("\n");
-            System.out.println("AMAZING! You sold " + acresToSell + " acres!" );
-            System.out.println("\n");
+            prompt();
         }
     }
 
     public void askHowManyBushelsToFeedPeople(int bushelsFed){
         if (game.calculateGrainToFeedPeople(state.getBushels(), bushelsFed) != 0){
             state.changeBushels(-bushelsFed);
-            System.out.println("Bushels left: " + state.getBushels()
-                    + "\nbushels eaten: " + bushelsFed);
+            prompt();
+        } else if (game.calculateGrainToFeedPeople(state.getBushels(), bushelsFed) == 0) {
+            if (game.starvationDeaths(state.getPopulation(), game.calculateGrainToFeedPeople(state.getBushels(), bushelsFed)) > state.getPopulation()*45/100){
+                System.out.println("You monster! You killed all of your people"); //<-updated gameover
+                exitGame();
+            }
         }
     }
 
     public void askHowManyAcresToPlant(int acresToPlant) {
-//        if (game.calculateAcresToPlant(acresToPlant, state.getLandsOwned(), state.getPopulation(), state.getBushels()) > 0) {
         acresToPlant = game.calculateAcresToPlant(acresToPlant, state.getLandsOwned(), state.getPopulation(), state.getBushels());
         state.changeBushels(-acresToPlant);
-        System.out.println(state.getBushels());
         state.changeBushels(game.harvest(acresToPlant));
-            System.out.println("Acres planted: " + acresToPlant +
-                    "\nUpdated Bushels " + state.getBushels());
-            // FINISHED
-//        } else if (game.calculateAcresToPlant(acresToPlant, state.getLandsOwned(), state.getPopulation(), state.getBushels()) == 0)
+        prompt();
     }
 
         public void announceGame () {
@@ -170,10 +168,46 @@ public class UserInterface {
             System.out.println("Our coffers have " + state.getBushels() + " bushels in storage.");
             System.out.println("The city owns " + state.getLandsOwned() + " acres of land.");
             System.out.println("Land is available to purchase for " + state.getPrice() + " bushels per acre");
+            System.out.println("Rats destroyed 200 bushels");
             System.out.println("\n");
         }
+        public void prompt() { //<-Newly added
+            System.out.println("Bushels left: " + state.getBushels()
+                    + "\npopulation number: " + state.getPopulation()
+                    + "\nAcres: " + state.getLandsOwned());
+        }
+        public void gameEndingPrompt() { //<-Newly added
+            System.out.printf("You completed the game with %.4f%% starvation deaths out of %s\n",
+                    (double) state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100, state.getPopulation());
+            System.out.printf("You completed the game with %.4f acres per population\n",
+                    (double) state.getLandsOwned() / state.getPopulation());
+        }
+        public void badEnding() { //<- Newly added
+            if (state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 >= 10 ||
+                    state.getLandsOwned() / state.getPopulation() <= 9) {
+                gameEndingPrompt();
+                System.out.println("While you brought your kingdom to make it through the years, you are " +
+                        "still a terrible ruler. Your people hated your guts!");
+            }
+        }
+        public void normalEnding() { //<-Newly added
+            if (state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 < 10 &&
+                    state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 > 3 ||
+                    state.getLandsOwned() / state.getPopulation() > 9 &&
+                            state.getLandsOwned() / state.getPopulation() <= 10) {
+                gameEndingPrompt();
+                System.out.println("You have brought normalization to your kingdom. You are one boring ruler!");
+            }
+        }
+        public void goodEnding() { //<-Newly added
+            if (state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 < 3 ||
+                    state.getLandsOwned() / state.getPopulation() > 10) {
+                gameEndingPrompt();
+                System.out.println("Your kingdom is thriving! You are one superb ruler!");
+            }
+        }
 
-        public boolean exitGame () { //fixed exitgame
+        public boolean exitGame () {
             int options = console.getNumber("Would you like to play? 1 = Yes, 2 = No");
             boolean answer = true;
             switch (options) {
