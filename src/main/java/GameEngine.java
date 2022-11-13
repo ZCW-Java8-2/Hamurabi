@@ -24,7 +24,7 @@ public class GameEngine {
 
     public int calculateAcresToSell(int acresToSell, int landOwned) {
         if (acresToSell > landOwned) {
-            System.out.println("Selling too much than what you own");
+            System.out.println("Selling too much than what you own!");
             return 0;
         } else {
             return acresToSell;
@@ -33,7 +33,6 @@ public class GameEngine {
 
     public int calculateGrainToFeedPeople(int bushels, int bushelsFed) {
         if (bushelsFed > bushels){
-            System.out.println("You don't have enough grain for that!");
             return 0;
         } else {
             return bushelsFed;
@@ -85,7 +84,6 @@ public class GameEngine {
     }
 
     public int starvationDeaths(int population, int bushelsFedToPeople) {
-        //returning the number of deaths
         if(population - (int) floor(bushelsFedToPeople/20) < 0) return 0;
         return population - (int) floor(bushelsFedToPeople/20);
     }

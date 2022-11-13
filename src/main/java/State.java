@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class State {
     int population, landsOwned, bushels, price, year;
-    int pDeaths, sDeaths, immigrants, harvest, rats;
+    int pDeaths, sDeaths, sDeathsPool, immigrants, harvest, rats, immigrantsPool;
     Random random = new Random();
 
     public State(){
@@ -152,5 +152,21 @@ public class State {
 
     public void setRats(int rats) {
         this.rats = rats;
+    }
+
+    public int getsDeathsPool() {
+        return sDeathsPool;
+    }
+
+    public void setsDeathsPool(int sDeathsPool) {
+        this.sDeathsPool = sDeathsPool;
+    }
+
+    public int getImmigrantsPool() {
+        return immigrantsPool;
+    }
+
+    public void setImmigrantsPool(int immigrantsPool) {
+        this.immigrantsPool = immigrantsPool;
     }
 }
