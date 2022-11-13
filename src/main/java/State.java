@@ -2,17 +2,36 @@ import java.util.Random;
 
 public class State {
     int population, landsOwned, bushels, price, year;
+    int pDeaths, sDeaths, immigrants, harvest, rats;
     Random random = new Random();
 
     public State(){
     }
 
-    public State(int population, int landsOwned, int bushels, int year, int price) {
+    public State(int population, int landsOwned, int bushels, int year, int price, int pDeaths, int sDeaths, int immigrants, int harvest, int rats) {
         this.population = population;
         this.landsOwned = landsOwned;
         this.bushels = bushels;
         this.year = year;
         this.price = price;
+        this.pDeaths = pDeaths;
+        this.sDeaths = sDeaths;
+        this.immigrants = immigrants;
+        this.harvest = harvest;
+        this.rats = rats;
+    }
+
+    public State(int population, int landsOwned, int bushels, int year, int price){
+        this.population = population;
+        this.landsOwned = landsOwned;
+        this.bushels = bushels;
+        this.year = year;
+        this.price = price;
+        this.pDeaths = 0;
+        this.sDeaths = 0;
+        this.immigrants = 0;
+        this.harvest = 0;
+        this.rats = 0;
     }
 
     public int getPopulation() {
@@ -73,5 +92,43 @@ public class State {
     public void incrementYear() {
         this.year += 1;
     }
+    public int getpDeaths() {
+        return pDeaths;
+    }
 
+    public void setpDeaths(int pDeaths) {
+        this.pDeaths = pDeaths;
+    }
+
+    public int getsDeaths() {
+        return sDeaths;
+    }
+
+    public void setsDeaths(int sDeaths) {
+        this.sDeaths = sDeaths;
+    }
+
+    public int getImmigrants() {
+        return immigrants;
+    }
+
+    public void setImmigrants(int immigrants) {
+        this.immigrants = immigrants;
+    }
+
+    public int getHarvest() {
+        return harvest;
+    }
+
+    public void setHarvest(int harvest) {
+        this.harvest = harvest;
+    }
+
+    public int getRats() {
+        return rats;
+    }
+
+    public void setRats(int rats) {
+        this.rats = rats;
+    }
 }

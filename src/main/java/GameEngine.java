@@ -1,5 +1,7 @@
 import java.util.*;
 
+import static java.lang.Math.floor;
+
 public class GameEngine {
 
     Random random = new Random();
@@ -12,18 +14,30 @@ public class GameEngine {
     }
 
     public int calculateAcresToBuy(int acresToBuy, int price, int bushels){
-        if ( (acresToBuy * price) > bushels){
-            System.out.println("You FOOL! You don't have enough bushels to buy that many acres!");
+        if ( (acresToBuy * price) >= bushels){
+            System.out.println("You FOOL! You're trying to buy more than what you can afford, you get nothing and like it!");
             return 0;
         } else return acresToBuy;
     }
 
-    public int calculateAcresToSell(int acresOwned) {
-        return 0;
+    public int calculateAcresToSell(int acresToSell, int landOwned, int population) {
+        if( (landOwned*100)/population < 70){
+            //GAME OVER
+            return 0;
+        } else if (acresToSell > landOwned) {
+            return 0;
+        } else {
+            return acresToSell;
+        }
     }
 
-    public int calculateGrainToFeedPeople(int bushels) {
-        return 0;
+    public int calculateGrainToFeedPeople(int bushels, int bushelsFed) {
+        if (bushelsFed > bushels){
+            System.out.println("You don't have enough grain for that!");
+            return 0;
+        } else {
+            return bushelsFed;
+        }
     }
 
     public int calculateAcresToPlant(int acresToPlant, int acresOwned, int population, int bushels) {
@@ -45,26 +59,32 @@ public class GameEngine {
     // ***************** SUPPLEMENTARY FEATURES
 
     public int plagueDeaths(int population) {
+        if(random.nextInt(101) < 15) return population/2;
         return 0;
     }
 
     public int starvationDeaths(int population, int bushelsFedToPeople) {
-        return 0;
+        //returning the number of deaths
+        if(population - (int) floor(bushelsFedToPeople/20) < 0) return 0;
+        return population - (int) floor(bushelsFedToPeople/20);
     }
 
     public boolean uprising(int population, int howManyPeopleStarved) {
-        return true;
+        if ((double) howManyPeopleStarved / population > 0.45) return true;
+        return false;
     }
 
     public int immigrants (int population, int acresOwned, int grainInStorage) {
-        return 0;
+        return (20 * acresOwned + grainInStorage) / (100 * population) + 1;
     }
 
     public int harvest (int bushelsUsedAsSeed) {
-        return 0;
+        //Returning for the number of bushels harvested per acre
+        return (random.nextInt(6)+1)*bushelsUsedAsSeed;
     }
 
     public int grainEatenByRats (int bushels) {
-        return random.nextInt(21)+10;
+        if(random.nextInt(100) < 40) return (random.nextInt(21)+10)*bushels;
+        return 0;
     }
 }

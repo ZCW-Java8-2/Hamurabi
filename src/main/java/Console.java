@@ -7,7 +7,7 @@ Scanner scanner = new Scanner(System.in);
                     // NEED TO CHANGE BOTH METHODS TO ENTER INPUT ON ANOTHER LINE
     int getNumber(String message) {
         while (true) {
-            System.out.print(message);
+            System.out.println(message);
             try {
                 return scanner.nextInt();
             }
