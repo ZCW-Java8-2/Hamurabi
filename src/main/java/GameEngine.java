@@ -6,7 +6,6 @@ public class GameEngine {
 
     Random random = new Random();
     int randomNum = random.nextInt();
-    State state = new State(); //<- Added this to revise immigrants, can't have immigrants when starvationDeath occurs
 
     // *****************************************************************************************************************
     // ***************** CONSTRUCTOR/GAME INITIALIZATION/ROUND INITILIZATION/EXIT
@@ -15,7 +14,6 @@ public class GameEngine {
     }
 
     public int calculateAcresToBuy(int acresToBuy, int price, int bushels){
-        state.setBushels(bushels);
         if ( (acresToBuy * price) > bushels){
             System.out.println("You FOOL! You're trying to buy more than what you can afford, you get nothing and like it!");
             return 0;
@@ -24,11 +22,9 @@ public class GameEngine {
         }
     }
 
-    public int calculateAcresToSell(int acresToSell, int landOwned, int population) {
-        if( (landOwned*100)/population < 70){
-            //GAME OVER
-            return 0;
-        } else if (acresToSell > landOwned) {
+    public int calculateAcresToSell(int acresToSell, int landOwned) {
+        if (acresToSell > landOwned) {
+            System.out.println("Selling too much than what you own");
             return 0;
         } else {
             return acresToSell;
@@ -100,7 +96,7 @@ public class GameEngine {
     }
 
     public int immigrants (int population, int acresOwned, int grainInStorage, int bushelsFedToPeople) {
-        if(starvationDeaths(population, bushelsFedToPeople) > 0) return 0; //Added this, read line 9
+        if(starvationDeaths(population, bushelsFedToPeople) > 0) return 0;
         return (20 * acresOwned + grainInStorage) / (100 * population) + 1;
     }
 

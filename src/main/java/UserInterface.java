@@ -7,7 +7,7 @@ public class UserInterface {
 
     public void main() {
 
-        while(true){  //Initialize a loop to keep the game playing if the game ends and the player wants to play again
+        while(true){  //Changed (exitGame==false) to (true) to keep the game running
             setUpNewGame();
             announceGame();
             while(state.getYear() < 11){ // Starts the actual game
@@ -39,7 +39,7 @@ public class UserInterface {
                 processRound(state.getPopulation(), bushelsFed, state.getLandsOwned(), acresToPlant*2, state.getBushels());
                 printSummary();
             }
-            if(exitGame() == false) break;
+            if(exitGame() == false) break; //<-updated exit game to the bottom
         }
     }
 
@@ -112,22 +112,22 @@ public class UserInterface {
             System.out.println("Bushels left: " + state.getBushels()
                             + "\nacres bought: " + acresToBuy
                     + "\nAcres update: " + state.getLandsOwned());
-            System.out.println("\n");
-            System.out.println("AMAZING! You bought " + acresToBuy + " acres!" );
-            System.out.println("\n");
+//            System.out.println("\n");
+//            System.out.println("AMAZING! You bought " + acresToBuy + " acres!" );
+//            System.out.println("\n");
         }
     }
 
     public void askHowManyAcresToSell(int acresToSell){
-        if (game.calculateAcresToSell(acresToSell, state.getLandsOwned(), state.getPopulation()) != 0){
+        if (game.calculateAcresToSell(acresToSell, state.getLandsOwned()) != 0){
             state.changeLandsOwned(-acresToSell);
             state.changeBushels(acresToSell * state.getPrice());
             System.out.println("Bushels left: " + state.getBushels()
                     + "\nacres sold: " + acresToSell
                     + "\nAcres update: " + state.getLandsOwned());
-            System.out.println("\n");
-            System.out.println("AMAZING! You sold " + acresToSell + " acres!" );
-            System.out.println("\n");
+//            System.out.println("\n");
+//            System.out.println("AMAZING! You sold " + acresToSell + " acres!" );
+//            System.out.println("\n");
         }
     }
 

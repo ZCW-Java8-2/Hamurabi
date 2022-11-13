@@ -8,17 +8,17 @@ public class State {
     public State(){
     }
 
-    public State(int population, int landsOwned, int bushels, int year, int price, int pDeaths, int sDeaths, int immigrants, int harvest, int rats) {
-        setPopulation(population); //<-using setters instead of instance variable
-        setLandsOwned(landsOwned);
-        setBushels(bushels);
-        setYear(year);
-        setPrice(price);
-        setpDeaths(pDeaths);
-        setsDeaths(sDeaths);
-        setImmigrants(immigrants);
-        setHarvest(harvest);
-        setRats(rats);
+//    public State(int population, int landsOwned, int bushels, int year, int price, int pDeaths, int sDeaths, int immigrants, int harvest, int rats) {
+//        setPopulation(population); //<-using setters instead of instance variable
+//        setLandsOwned(landsOwned);
+//        setBushels(bushels);
+//        setYear(year);
+//        setPrice(price);
+//        setpDeaths(pDeaths);
+//        setsDeaths(sDeaths);
+//        setImmigrants(immigrants);
+//        setHarvest(harvest);
+//        setRats(rats);
 
         //        this.population = population;
 //        this.landsOwned = landsOwned;
@@ -30,7 +30,7 @@ public class State {
 //        this.immigrants = immigrants;
 //        this.harvest = harvest;
 //        this.rats = rats;
-    }
+//    }
 
     public State(int population, int landsOwned, int bushels, int year, int price){
         setPopulation(population); //<-Using setters instead of instance variable
