@@ -1,17 +1,36 @@
 package hammurabi.docs.matuszek;//package Hammurabi;
 import java.util.Random;         // imports go here
 import java.util.Scanner;
+import hammurabi.docs.matuszek.normalEvents.*;
 
     public class Hammurabi {         // must save in a file named Hammurabi.java
         Random rand = new Random();  // this is an instance variable
         Scanner scanner = new Scanner(System.in);
 
-
+        int year = 0;
         boolean gameOver = false;
         int harvest = 0;
         int ratEaten = 0;
         int starving = 0;
         int immigrants = 0;
+        public int people = 100;
+        public int bushelsOfGrain = 2800;
+        public int acres = 1000;
+        public int landValue = 25;
+
+        int peopleDeath = 0;
+        int plagueDeath = 0;
+
+
+
+
+        public Hammurabi(int peo,int bus, int acr, int lan){
+            this.people=peo;
+            this.bushelsOfGrain=bus;
+            this.acres=acr;
+            this.landValue=lan;
+
+        /*
         int people;
         int bushelsOfGrain;
         int acres;
@@ -24,17 +43,22 @@ import java.util.Scanner;
             this.bushelsOfGrain = bus;
             this.acres = acr;
             this.landValue = lan;
+          */
+
         }
 
 
         public static void main(String[] args) { // required in every Java program
 
+
             new Hammurabi(100, 2800, 1000, 19).playGame();
+
         }
 
         void playGame() {
             // declare local variables here: grain, population, etc.
             // statements go after the declations
+
             int people = 100;
             int bushelsOfGrain = 2800;
             int acres = 1000;
@@ -85,6 +109,7 @@ import java.util.Scanner;
                 newCostOfLandPeople =newCostOfLand();
 
             }
+
 
         }
 
@@ -153,11 +178,21 @@ import java.util.Scanner;
         //Ask the player how many acres to plant with grain, and returns that number.
         // You must have enough acres, enough grain, and enough people to do the planting.
         // Any grain left over goes into storage for next year.
+
+        int plagueDeaths(int population){
+            int plaDea = rand.nextInt(100)+1;
+            if(plaDea<=15) {
+                return this.peopleDeath = population / 2;
+            }else return 0;
+
+        /*
         int plagueDeaths(int population) {
             int plaDea = rand.nextInt(100) + 1;
             if (plaDea <= 15) {
                 return population / 2;
             } else return 0;
+            */
+
         }
 
 
