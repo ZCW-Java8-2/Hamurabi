@@ -1,6 +1,6 @@
 public class UserInterface {
 
-    Hammurabi game = new Hammurabi();
+    GameEngine game = new GameEngine();
     Console console = new Console();
     State state = new State();
 
@@ -49,7 +49,7 @@ public class UserInterface {
     }
 
     public void askHowManyAcresToBuy(int acresToBuy){
-        if (game.howManyAcresToBuy(acresToBuy, state.getPrice(), state.getBushels()) != 0){
+        if (game.calculateAcresToBuy(acresToBuy, state.getPrice(), state.getBushels()) != 0){
             state.changeLandsOwned(acresToBuy);
             state.changeBushels(acresToBuy * state.getPrice());
             System.out.println("AMAZING! You bought " + acresToBuy + "acres!" );
@@ -57,7 +57,7 @@ public class UserInterface {
     }
 
     public void askHowManyAcresToSell(int acresToSell){
-        if (game.howManyAcresToSell(state.getLandsOwned()) != 0){
+        if (game.calculateAcresToSell(state.getLandsOwned()) != 0){
             state.changeLandsOwned(acresToSell);
             state.changeBushels(acresToSell * state.getPrice());
             System.out.println("AMAZING! You sold " + acresToSell + "acres!" );

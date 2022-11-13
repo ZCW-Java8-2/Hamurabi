@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Hammurabi {
+public class GameEngine {
 
     Random random = new Random();
     int randomNum = random.nextInt();
@@ -8,26 +8,37 @@ public class Hammurabi {
     // *****************************************************************************************************************
     // ***************** CONSTRUCTOR/GAME INITIALIZATION/ROUND INITILIZATION/EXIT
 
-    public Hammurabi() {
+    public GameEngine() {
     }
 
-    public int howManyAcresToBuy(int acresToBuy, int price, int bushels){
+    public int calculateAcresToBuy(int acresToBuy, int price, int bushels){
         if ( (acresToBuy * price) > bushels){
             System.out.println("You FOOL! You don't have enough bushels to buy that many acres!");
             return 0;
         } else return acresToBuy;
     }
 
-    public int howManyAcresToSell(int acresOwned) {
+    public int calculateAcresToSell(int acresOwned) {
         return 0;
     }
 
-    public int howMuchGrainToFeedPeople(int bushels) {
+    public int calculateGrainToFeedPeople(int bushels) {
         return 0;
     }
 
-    public int howManyAcresToPlant(int acresOwned, int population, int bushels) {
-        return 0;
+    public int calculateAcresToPlant(int acresToPlant, int acresOwned, int population, int bushels) {
+        if (acresToPlant > acresOwned){
+            System.out.println("You dum dum, you only have " + acresOwned + " acres!");
+            return 0;
+        } else if ( acresToPlant/10 > population){
+            System.out.println("You don't have enough people to plant that many acres!!");
+            return 0;
+        } else if (acresToPlant/2 > bushels){
+            System.out.println("You don't have enough grain to plant that many acres!");
+            return 0;
+        } else {
+            return acresToPlant; // do state.changeBushels((acresToPlant*2)*-1) in the UserInterface class...
+        }
     }
 
     // *****************************************************************************************************************
