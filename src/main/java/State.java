@@ -9,29 +9,51 @@ public class State {
     }
 
     public State(int population, int landsOwned, int bushels, int year, int price, int pDeaths, int sDeaths, int immigrants, int harvest, int rats) {
-        this.population = population;
-        this.landsOwned = landsOwned;
-        this.bushels = bushels;
-        this.year = year;
-        this.price = price;
-        this.pDeaths = pDeaths;
-        this.sDeaths = sDeaths;
-        this.immigrants = immigrants;
-        this.harvest = harvest;
-        this.rats = rats;
+        setPopulation(population); //<-using setters instead of instance variable
+        setLandsOwned(landsOwned);
+        setBushels(bushels);
+        setYear(year);
+        setPrice(price);
+        setpDeaths(pDeaths);
+        setsDeaths(sDeaths);
+        setImmigrants(immigrants);
+        setHarvest(harvest);
+        setRats(rats);
+
+        //        this.population = population;
+//        this.landsOwned = landsOwned;
+//        this.bushels = bushels;
+//        this.year = year;
+//        this.price = price;
+//        this.pDeaths = pDeaths;
+//        this.sDeaths = sDeaths;
+//        this.immigrants = immigrants;
+//        this.harvest = harvest;
+//        this.rats = rats;
     }
 
     public State(int population, int landsOwned, int bushels, int year, int price){
-        this.population = population;
-        this.landsOwned = landsOwned;
-        this.bushels = bushels;
-        this.year = year;
-        this.price = price;
-        this.pDeaths = 0;
-        this.sDeaths = 0;
-        this.immigrants = 0;
-        this.harvest = 0;
-        this.rats = 0;
+        setPopulation(population); //<-Using setters instead of instance variable
+        setLandsOwned(landsOwned);
+        setBushels(bushels);
+        setYear(year);
+        setPrice(price);
+        setpDeaths(0);
+        setsDeaths(0);
+        setImmigrants(immigrants);
+        setHarvest(harvest);
+        setRats(rats);
+//
+//        this.population = population;
+//        this.landsOwned = landsOwned;
+//        this.bushels = bushels;
+//        this.year = year;
+//        this.price = price;
+//        this.pDeaths = 0;
+//        this.sDeaths = 0;
+//        this.immigrants = 0;
+//        this.harvest = 0;
+//        this.rats = 0;
     }
 
     public int getPopulation() {

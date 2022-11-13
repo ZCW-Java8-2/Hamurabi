@@ -8,7 +8,8 @@ import static org.junit.Assert.assertTrue;
 
 class GameEngineTest {
 
-
+    GameEngine game = new GameEngine(); //<-Added this for test
+    State state = new State();//<-Added this for test
     boolean about(double expected, double actual) {
         return actual > 0.90 * expected && actual < 1.10 * expected;
     }
@@ -21,6 +22,101 @@ class GameEngineTest {
         int expected = 10;
         int actual = game.calculateAcresToBuy(20, state.getPrice(), state.getBushels());
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void HowManyAcresToBuyTest1() {
+        //If price of acres are at maximum of 24
+        state.setBushels(1000);
+        state.setLandsOwned(100);
+        int acresBought = game.calculateAcresToBuy(40, state.newCostOfLand(), state.getBushels());
+        Assert.assertEquals(40, acresBought);
+    }
+    @Test
+    public void HowManyAcresToBuyTest2() {
+        //If price of acres are at minimum of 17
+        state.setBushels(679);
+        state.setLandsOwned(100);
+        int acresBought = game.calculateAcresToBuy(40, state.newCostOfLand(), state.getBushels());
+        Assert.assertEquals(0, acresBought);
+    }
+    @Test
+    public void HowManyAcresToBuyTest3() {
+        //If price of acres are random
+        state.setBushels(800);
+        state.setLandsOwned(100);
+        int acresBought = game.calculateAcresToBuy(40, state.newCostOfLand(), state.getBushels());
+        Assert.assertTrue("Acres bought is " + acresBought,
+                acresBought == 40 || acresBought == 0);
+    }
+    @Test
+    public void HowManyAcresToBuyTest4() {
+        //Updated acres Owned
+        state.setBushels(800);
+        state.setLandsOwned(100);
+        state.setLandsOwned(100);
+        Assert.assertTrue("Acres bought is " + state.getLandsOwned(),
+                state.getLandsOwned() == 140 || state.getLandsOwned() == 100);
+    }
+
+
+    @Test
+    public void howManyAcresToPlantTest1() { //Added
+        //If acres to be planted is more than acres owned
+        state.setLandsOwned(1000);
+        state.setPopulation(100);
+        state.setBushels(1001);
+        Assert.assertEquals(1000, game.calculateAcresToPlant(1001, state.getLandsOwned(),state.getPopulation(), state.getBushels()));
+    }
+    @Test
+    public void howManyAcresToPlantTest2() { //Added
+        //If acres to be planted is more than population * 10
+        state.setLandsOwned(1000);
+        state.setPopulation(90);
+        state.setBushels(1001);
+        Assert.assertEquals(900, game.calculateAcresToPlant(1000, state.getLandsOwned(),state.getPopulation(), state.getBushels()));
+    }
+    @Test
+    public void howManyAcresToPlantTest3() { //Added
+        //If acres to be planted is more than bushels
+        state.setLandsOwned(1100);
+        state.setPopulation(100);
+        state.setBushels(900);
+        Assert.assertEquals(900, game.calculateAcresToPlant(1000, state.getLandsOwned(),state.getPopulation(), state.getBushels()));
+    }
+    @Test
+    public void howManyAcresToPlantTest4() { //Added
+        //If acres to be planted is more than bushels and bushels is more than population
+        state.setLandsOwned(1100);
+        state.setPopulation(65);
+        state.setBushels(900);
+        Assert.assertEquals(650, game.calculateAcresToPlant(1000, state.getLandsOwned(), state.getPopulation(), state.getBushels()));
+    }
+
+    @Test
+    public void howManyAcresToPlantTest5() { //Added
+        //If acres to be planted is more than population and population is more than acres owned
+            state.setLandsOwned(500);
+            state.setPopulation(65);
+            state.setBushels(1000);
+            Assert.assertEquals(500, game.calculateAcresToPlant(1000, state.getLandsOwned(),state.getPopulation(), state.getBushels()));
+    }
+
+    @Test
+    public void howManyAcresToPlantTest6() { //Added
+        //If acres to be planted is more than acres owned and acres owned is more than bushels
+            state.setLandsOwned(800);
+            state.setPopulation(65);
+            state.setBushels(500);
+            Assert.assertEquals(500, game.calculateAcresToPlant(1000, state.getLandsOwned(),state.getPopulation(), state.getBushels()));
+    }
+    @Test
+    public void howManyAcresToPlantTest7() { //Added
+        //If everything is lower than acres to be planted
+        state.setLandsOwned(900);
+        state.setPopulation(90);
+        state.setBushels(800);
+        Assert.assertEquals(800, game.calculateAcresToPlant(1000, state.getLandsOwned(),state.getPopulation(), state.getBushels()));
     }
 
     @Test
@@ -71,7 +167,7 @@ class GameEngineTest {
     @Test
     public final void testImmigrants() {
         GameEngine game = new GameEngine();
-        int imm = game.immigrants(10, 1200, 500);
+        int imm = game.immigrants(10, 1200, 500, 200);
         assertEquals("Wrong number of immigrants.", 25, imm);
     }
 
