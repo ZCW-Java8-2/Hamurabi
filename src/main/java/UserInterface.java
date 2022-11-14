@@ -48,12 +48,13 @@ public class UserInterface {
             }
 
             if (state.getYear() == 11) { //<-newly added, it works
+                console.gameEndingPrompt(state.getsDeathsPool(), state.getImmigrantsPool(), state.getPopulation(), state.getLandsOwned());
                 badEnding();
                 normalEnding();
                 goodEnding();
+                break;
             }
-
-            if (console.exitGame() == false) break;
+//            if (console.exitGame() == false) break;
         }
     }
 
@@ -136,7 +137,7 @@ public class UserInterface {
             if (game.starvationDeaths(state.getPopulation(), game.calculateGrainToFeedPeople(state.getBushels(), bushelsFed)) > state.getPopulation() * 45 / 100) {
 
                 console.monster(); //<-updated gameover
-                console.exitGame();
+//                console.exitGame();
 
             }
         }
@@ -152,30 +153,29 @@ public class UserInterface {
     }
 
     public void badEnding() { //<- Newly added
-        if (state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 >= 10 ||
-                state.getLandsOwned() / state.getPopulation() <= 9) {
+        if ((double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 >= 10 && (double)state.getLandsOwned() / state.getPopulation() <= 9 ||
+            (double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 >= 10 && (double)state.getLandsOwned() / state.getPopulation() > 9 ||
+            (double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 < 10 && (double)state.getLandsOwned() / state.getPopulation() <= 9) {
 
-            console.gameEndingPrompt(state.getsDeathsPool(), state.getImmigrantsPool(), state.getPopulation(), state.getLandsOwned());
             console.guts();
         }
     }
 
     public void normalEnding() { //<-Newly added
-        if (state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 < 10 &&
-                state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 > 3 ||
-                state.getLandsOwned() / state.getPopulation() > 9 &&
-                        state.getLandsOwned() / state.getPopulation() <= 10) {
+        if ((double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 < 10 && (double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 >= 3 &&
+            (double)state.getLandsOwned() / state.getPopulation() > 9 && (double)state.getLandsOwned() / state.getPopulation() <= 10 ||
+            (double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 < 10 && (double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 >= 3 &&
+            (double)state.getLandsOwned() / state.getPopulation() > 9 ||
+            (double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 < 3 &&
+            (double)state.getLandsOwned() / state.getPopulation() > 9 && (double)state.getLandsOwned() / state.getPopulation() <= 10) {
 
-            console.gameEndingPrompt(state.getsDeathsPool(), state.getImmigrantsPool(), state.getPopulation(), state.getLandsOwned());
             console.boring();
         }
     }
 
     public void goodEnding() { //<-Newly added
-        if (state.getsDeathsPool() / (1000 + state.getImmigrantsPool()) * 100 < 3 ||
-                state.getLandsOwned() / state.getPopulation() > 10) {
+        if ((double)state.getsDeathsPool() / (100 + state.getImmigrantsPool()) * 100 < 3 && (double)state.getLandsOwned() / state.getPopulation() > 10) {
 
-            console.gameEndingPrompt(state.getsDeathsPool(), state.getImmigrantsPool(), state.getPopulation(), state.getLandsOwned());
             console.thriving();
 
         }

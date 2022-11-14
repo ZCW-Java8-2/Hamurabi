@@ -20,6 +20,13 @@ public class GameEngine {
             return acresToBuy;
         }
     }
+//        if ( (acresToBuy * price) > bushels){
+//            System.out.println("Commander, since you are being greedy, ZCW8.2 malfunctions and hereby unable to purchase any galaxies for 1 million years");
+//            return 0;
+//        } else {
+//            return acresToBuy;
+//        }
+//    }
 
     public int calculateAcresToSell(int acresToSell, int landOwned) {
         if (acresToSell > landOwned) {
@@ -29,6 +36,13 @@ public class GameEngine {
             return acresToSell;
         }
     }
+//        if (acresToSell > landOwned) {
+//            System.out.println("Commander, since you are being greedy, ZCW8.2 malfunctions and hereby unable to sell any galaxies for 1 million years");
+//            return 0;
+//        } else {
+//            return acresToSell;
+//        }
+//    }
 
     public int calculateGrainToFeedPeople(int bushels, int bushelsFed) {
         if (bushelsFed > bushels){
