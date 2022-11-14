@@ -60,6 +60,7 @@ public class Console {
         System.out.println("\n");
         System.out.println("The following will help you in your decisions:");
         System.out.println("\n");
+
         System.out.println("**Each person needs at least 20 bushels of grain per year to survive**");
         System.out.println("**Each person can farm at most 10 acres of land**");
         System.out.println("**It takes 1 bushel of grain to farm an acre of land**");
@@ -156,8 +157,13 @@ public class Console {
 //    }
 
     public void gameEndingPrompt(int deathsPool, int immigrantsPool, int population, int landsOwned) { //<-Newly added
-        System.out.printf("You completed the game with %.4f%% starvation deaths out of %s\n",
-                (double) deathsPool / (1000 + immigrantsPool) * 100, population);
+//        System.out.printf("You completed the game with %.4f%% starvation deaths out of %s\n",
+//                (double) deathsPool / (1000 + immigrantsPool) * 100, population);
+//        System.out.printf("You completed the game with %.4f acres per population\n",
+//                (double) landsOwned / population);
+
+        System.out.printf("You completed the game with %.4f%% starvation deaths, %s deaths by starvation vs %s of the total population\n",
+                (double) deathsPool / (100 + immigrantsPool) * 100, deathsPool, 100 + immigrantsPool);
         System.out.printf("You completed the game with %.4f acres per population\n",
                 (double) landsOwned / population);
     }
