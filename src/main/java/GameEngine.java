@@ -13,36 +13,36 @@ public class GameEngine {
     }
 
     public int calculateAcresToBuy(int acresToBuy, int price, int bushels){
-//        if ( (acresToBuy * price) > bushels){
-//            System.out.println("You FOOL! You're trying to buy more than what you can afford, you get nothing and like it!");
-//            return 0;
-//        } else {
-//            return acresToBuy;
-//        }
-//    }
         if ( (acresToBuy * price) > bushels){
-            System.out.println("Commander, since you are being greedy, ZCW8.2 malfunctions and hereby unable to purchase any galaxies for 1 million years");
+            System.out.println("You FOOL! You're trying to buy more than what you can afford, you get nothing and like it!");
             return 0;
         } else {
             return acresToBuy;
         }
     }
-
-    public int calculateAcresToSell(int acresToSell, int landOwned) {
-//        if (acresToSell > landOwned) {
-//            System.out.println("Selling too much than what you own!");
+//        if ( (acresToBuy * price) > bushels){
+//            System.out.println("Commander, since you are being greedy, ZCW8.2 malfunctions and hereby unable to purchase any galaxies for 1 million years");
 //            return 0;
 //        } else {
-//            return acresToSell;
+//            return acresToBuy;
 //        }
 //    }
+
+    public int calculateAcresToSell(int acresToSell, int landOwned) {
         if (acresToSell > landOwned) {
-            System.out.println("Commander, since you are being greedy, ZCW8.2 malfunctions and hereby unable to sell any galaxies for 1 million years");
+            System.out.println("Selling too much than what you own!");
             return 0;
         } else {
             return acresToSell;
         }
     }
+//        if (acresToSell > landOwned) {
+//            System.out.println("Commander, since you are being greedy, ZCW8.2 malfunctions and hereby unable to sell any galaxies for 1 million years");
+//            return 0;
+//        } else {
+//            return acresToSell;
+//        }
+//    }
 
     public int calculateGrainToFeedPeople(int bushels, int bushelsFed) {
         if (bushelsFed > bushels){
