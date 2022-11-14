@@ -1,5 +1,3 @@
-package hammurabi;
-
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -8,7 +6,7 @@ import org.junit.Test;
 public class HammurabiTest {
     
     Hammurabi ham;
-    
+
     boolean about(double expected, double actual) {
         return actual > 0.90 * expected && actual < 1.10 * expected;
     }

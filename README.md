@@ -29,7 +29,7 @@ package hammurabi;               // package declaration
 import java.util.Random;         // imports go here
 import java.util.Scanner;
 
-public class Hammurabi {         // must save in a file named Hammurabi.java
+public class GameEngine {         // must save in a file named GameEngine.java
     Random rand = new Random();  // this is an instance variable
     Scanner scanner = new Scanner(System.in);
 
