@@ -7,7 +7,7 @@ public class GameEngine {
     Random random = new Random();
 
     // *****************************************************************************************************************
-    // ***************** CONSTRUCTOR/GAME INITIALIZATION/ROUND INITILIZATION/EXIT
+    // ***************** GAME INITIALIZATION/ROUND INITILIZATION/EXIT
 
     public GameEngine() {
     }
